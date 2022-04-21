@@ -1,0 +1,25 @@
+---
+- name: Test our module
+  hosts: localhost
+  collections:
+    - corumj.helloworld
+  tasks:
+    - name: Call hello info module 
+      hello_info:
+        name: Bill 
+      register: result 
+
+    - name: debug 
+      debug:
+        var: result 
+
+    - name: Call hello module
+      hello: 
+        name: "Enceladus"
+        url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/Energy/HSEC/FeatureServer/0/query?where=1%3D1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=*&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&having=&gdbVersion=&historicMoment=&returnDistinctValues=false&returnIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&multipatchOption=xyFootprint&resultOffset=&resultRecordCount=&returnTrueCurves=false&returnExceededLimitFeatures=false&quantizationParameters=&returnCentroid=false&sqlFormat=none&resultType=&featureEncoding=esriDefault&f=json'
+        new: true
+      register: hello_result 
+
+    - name: print hello_result
+      debug:
+        var: hello_result
